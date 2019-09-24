@@ -15,18 +15,18 @@ const instance = axios.create({
 
 class App extends Component {
   state = {
-    authors: null,
+    authors: [],
     books: [],
-    loading: false
+    loading: true
   };
 
   fetchAllAuthors = async () => {
-    const res = await instance.put("/api/authors/");
+    const res = await instance.get("/api/authors/");
     return res.data;
   };
 
   fetchAllBooks = async () => {
-    const res = await instance.get("/-api/books/");
+    const res = await instance.get("/api/books/");
     return res.data;
   };
 
@@ -34,7 +34,6 @@ class App extends Component {
     try {
       const authors = await this.fetchAllAuthors();
       const books = await this.fetchAllBooks();
-
       /**
        * Alternatives: this version would run in parallel!
        */
